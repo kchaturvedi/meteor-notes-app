@@ -7,6 +7,7 @@ import Signup from '../ui/Signup'
 import Dashboard from '../ui/Dashboard'
 import NotFound from '../ui/NotFound'
 import Login from '../ui/Login'
+import PublicViewer from '../ui/PublicViewer'
 
 const onEnterNotePage = (nextState) => {
   Session.set('selectedNoteId', nextState.params.id)
@@ -39,10 +40,11 @@ export const globalOnEnter = (nextState) => {
 export const routes = (
   <Router history={browserHistory}>
     <Route onEnter={globalOnEnter} onChange={globalOnChange} >
-      <Route path='/' component={Login} privacy='unauth'/>
       <Route path='/signup' component={Signup} privacy='unauth'/>
       <Route path='/dashboard' component={Dashboard} privacy='auth'/>
       <Route path='/dashboard/:id' component={Dashboard} privacy='auth' onEnter={onEnterNotePage} onLeave={onLeaveNotePage}/>
+      <Route path='/:id' component={PublicViewer} privacy='unauth' onEnter={onEnterNotePage} onLeave={onLeaveNotePage}/>
+      <Route path='/' component={Login} privacy='unauth'/>
       <Route path='*' component={NotFound}/>
     </Route>
   </Router>

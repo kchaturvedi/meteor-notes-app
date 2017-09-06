@@ -7,6 +7,32 @@
   width: 100%;
 }
 
+.editor__toolbar {
+  display: flex;
+  width: 90%;
+  align-items: center;
+}
+
+.editor__delete {
+  margin: 0;
+  outline: none;
+}
+
+.editor__privacy {
+  margin: 0 $space;
+}
+
+.editor__link {
+  flex-grow: 0.5;
+  display: inline-block;
+  text-align: center;
+  font-weight: 300;
+  outline: none;
+  padding: $input-spacing;
+  resize: none;
+  margin: 0;
+}
+
 .editor__title {
   border: none;
   border-bottom: 2px solid $grey;
@@ -30,4 +56,51 @@
   text-align: center;
   margin: $large-space;
   font-style: italic;
+}
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid $button-secondary-border-color;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 35px; padding: 0; line-height: 30px;
+    font-size: $base-font-size; color: $button-color;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Public";
+    padding-left: $input-spacing;
+    background-color: #13C920; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Private";
+    padding-right: $input-spacing;
+    background-color: $button-secondary-bg; color: $button-secondary-color;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 10px;
+    background: #FFFFFF;
+    position: absolute; top: -10px; bottom: -10px;
+    right: 62px;
+    border: 2px solid $button-secondary-border-color;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: -10px; 
 }

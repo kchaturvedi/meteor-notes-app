@@ -27,6 +27,14 @@
   background: $button-secondary-bg;
   color: $button-secondary-color;
   border: 1px solid $button-secondary-border-color;
+  transition: .3s ease;
+}
+
+.button--warning {
+  background: $button-warning-bg;
+  color: $button-warning-color;
+  border: 1px solid $button-warning-border-color;
+  transition: all .3s ease;
 }
 
 .button--link-text {

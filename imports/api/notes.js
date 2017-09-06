@@ -2,12 +2,13 @@ import { Meteor } from 'meteor/meteor'
 import { Mongo } from 'meteor/mongo'
 import moment from 'moment'
 import SimpleSchema from 'simpl-schema'
+import shortid from 'shortid'
 
 export const Notes = new Mongo.Collection('notes')
 
 if (Meteor.isServer) {
   Meteor.publish('notes', function () {
-    return Notes.find({ userId: this.userId })
+    return Notes.find({ $or: [{userId: this.userId},{isPublic: true}] })
   })
 }
 
@@ -18,9 +19,11 @@ Meteor.methods({
     }
     
     return Notes.insert({
+      _id: shortid.generate(),
       title: '',
       body: '',
       userId: this.userId,
+      isPublic: false,
       updatedAt: moment().valueOf()
     })
   },
@@ -47,6 +50,10 @@ Meteor.methods({
       _id: {
         type: String,
         min: 1
+      },
+      isPublic: {
+        type: Boolean,
+        optional: true
       },
       title: {
         type: String,

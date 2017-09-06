@@ -18,7 +18,7 @@ Tracker.autorun(() => {
   const selectedNoteId = Session.get('selectedNoteId')
   Session.set('isNavOpen', false)
   
-  if (selectedNoteId) {
+  if (selectedNoteId && browserHistory.getCurrentLocation().pathname.startsWith('/dashboard')) {
     browserHistory.replace(`/dashboard/${selectedNoteId}`)
   }
 })

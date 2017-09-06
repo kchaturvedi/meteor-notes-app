@@ -3,6 +3,9 @@ $brand-primary: #397ab1;
 $grey: #dddddd;
 $light-grey: #f9f9f9;
 $dark-grey: #777777;
+$red: #b13939;
+$light-red: #c33636;
+
 
 // Body
 $body-background-color: #fafafa;
@@ -34,6 +37,9 @@ $button-pill-color: $brand-primary;
 $button-secondary-bg: $light-grey;
 $button-secondary-color: $dark-grey;
 $button-secondary-border-color: $grey;
+$button-warning-bg: $red;
+$button-warning-color: $light-grey;
+$button-warning-border-color: $light-red;
 
 // Header
 $header-bg: $brand-primary;
