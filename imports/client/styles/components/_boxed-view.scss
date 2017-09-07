@@ -1,6 +1,7 @@
 .boxed-view {
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100vh;
   width: 100vw;
@@ -21,6 +22,16 @@
   padding: 2.4rem;
   text-align: center;
   width: 24rem;
+}
+
+.boxed-view__message {
+  background: $boxed-view-bg;
+  border: 1px solid $boxed-view-border-color;
+  padding: 2.4rem;
+  text-align: center;
+  width: 35rem;
+  margin-top: $large-space;
+  font-size: 1.5rem;
 }
   
 .boxed-view__form {

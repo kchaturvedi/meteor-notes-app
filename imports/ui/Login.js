@@ -40,6 +40,10 @@ export class Login extends React.Component {
           
           <Link to='/signup'>Don't have an account?</Link>
         </div>
+        <div className='boxed-view__message'>
+          <p>Just want to check the app out?</p>
+          <p>Login with <i>'user@test.com'</i> and <i>'password'</i> to test the app without creating an account!</p>
+        </div>
       </div>
     )
   }
