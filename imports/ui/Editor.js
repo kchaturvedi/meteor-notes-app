@@ -7,7 +7,7 @@ import { Session } from 'meteor/session'
 import { Notes } from '../api/notes'
 
 export class Editor extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       title: '',
@@ -16,52 +16,60 @@ export class Editor extends React.Component {
       deleteConfirm: false
     }
   }
-  
-  handleBodyChange(e) {
+
+  handleBodyChange (e) {
     const body = e.target.value
     this.setState({ body, deleteConfirm: false })
     this.props.call('notes.update', this.props.note._id, { body })
   }
-  
-  handleTitleChange(e) {
+
+  handleTitleChange (e) {
     const title = e.target.value
     this.setState({ title, deleteConfirm: false })
     this.props.call('notes.update', this.props.note._id, { title })
   }
-  
-  handleDeleteNote() {
+
+  handleDeleteNote (e) {
+    e.preventDefault()
     if (this.state.deleteConfirm) {
-      this.props.call('notes.remove', this.props.note._id)
-      this.props.browserHistory.push('/dashboard')
-      this.setState({ deleteConfirm: false })
+      const notecard = document.querySelector('.note-card')
+      notecard.style.animationDuration = '0.5s'
+      notecard.classList.add('animated', 'fadeOutDown')
+      setTimeout(() => {
+        this.props.call('notes.remove', this.props.note._id)
+        this.props.browserHistory.push('/dashboard')
+        this.setState({ deleteConfirm: false })
+      }, 500)
     } else {
       this.setState({ deleteConfirm: true })
     }
   }
-  
-  handlePrivacyChange(e) {
+
+  handlePrivacyChange (e) {
     const isPublic = !!e.target.checked
     this.setState({ isPublic })
     this.props.call('notes.update', this.props.note._id, { isPublic })
   }
-  
-  handleCopy() {
-    const linkArea = document.querySelector('.editor__link')
+
+  handleCopy () {
+    const linkArea = document.querySelector('#note-link')
     linkArea.select()
     document.execCommand('copy')
     const linkAreaLink = linkArea.value
     linkArea.value = 'LINK COPIED!'
-    linkArea.setAttribute('style', 'background-color:#13C920; transition: all 0.5s ease;');
+    linkArea.setAttribute('style', 'background-color:#9bc99d; transition: all 0.5s ease;')
+    linkArea.classList.add('animated', 'tada')
     setTimeout(() => {
       linkArea.value = linkAreaLink
-      linkArea.setAttribute('style', 'background-color:white; transition: all 0.5s ease;');
-    }, 500)
+      linkArea.setAttribute('style', 'background-color:white; transition: all 0.5s ease;')
+      linkArea.classList.remove('animated', 'tada')
+    }, 1000)
   }
-  
-  componentDidUpdate(prevProps, prevState) {
+
+  componentDidUpdate (prevProps, prevState) {
     const currentNoteId = this.props.note ? this.props.note._id : undefined
     const prevNoteId = prevProps.note ? prevProps.note._id : undefined
-    
+
     if (currentNoteId && currentNoteId !== prevNoteId) {
       this.setState({
         title: this.props.note.title,
@@ -71,36 +79,54 @@ export class Editor extends React.Component {
       })
     }
   }
-  
-  render() {
-    const deleteButtonClass = this.state.deleteConfirm ? 'button button--warning editor__delete' : 'button button--secondary editor__delete'
-    
+
+  render () {
+    const deleteButtonClass = this.state.deleteConfirm ? 'btn-warning' : 'btn-default'
+
     if (this.props.note) {
       return (
-        <div className='editor'>
-          <input className='editor__title' value={this.state.title} placeholder='Untitled note' onChange={this.handleTitleChange.bind(this)}/>
-          <textarea className='editor__body' value={this.state.body} placeholder='Your note here' onChange={this.handleBodyChange.bind(this)}></textarea>
-          <div className='editor__toolbar'>
-            <button className={deleteButtonClass} onClick={this.handleDeleteNote.bind(this)}>{this.state.deleteConfirm ? 'Confirm delete?' : 'Delete Note'}</button>
-            <div className='onoffswitch editor__privacy'>
-              <input type='checkbox' name='onoffswitch' className='onoffswitch-checkbox' id='myonoffswitch' checked={this.state.isPublic} onChange={this.handlePrivacyChange.bind(this)}></input>
-              <label className='onoffswitch-label' htmlFor='myonoffswitch'>
-                <span className='onoffswitch-inner'></span>
-                <span className='onoffswitch-switch'></span>
-              </label>
+        <div className='card note-card' style={{ height: '69.8vh' }} >
+          <div className='card-body' style={{ overflow: 'scroll' }}>
+            <form className='form has-info'>
+              <input id='note-title' type='text' className='form-control' value={this.state.title} placeholder='Untitled note' onChange={this.handleTitleChange.bind(this)} />
+              <textarea id='note-body' type='textarea' className='form-control mh-100 mt-2' rows='25' value={this.state.body} placeholder='Write something inspiring...' onChange={this.handleBodyChange.bind(this)} />
+            </form>
+          </div>
+          <div className='card-footer pb-4'>
+            <div className='container'>
+              <div className='row align-items-center'>
+                <div className='col-lg-2 text-center'>
+                  <button className={'btn btn-sm ' + deleteButtonClass} onClick={this.handleDeleteNote.bind(this)}>
+                    {this.state.deleteConfirm ? 'Sure?' : 'Delete'}
+                  </button>
+                </div>
+                <div className='col-lg-2 text-center'>
+                  <div className='togglebutton'>
+                    <label>
+                      <input type='checkbox' checked={this.state.isPublic} onChange={this.handlePrivacyChange.bind(this)} />
+                      <span className='toggle' />
+                      {this.state.isPublic ? 'Public' : 'Private'}
+                    </label>
+                  </div>
+                </div>
+                <div className='col-lg-4 text-center'>
+                  {
+                    this.state.isPublic ? <input className={'form-control text-center'} style={{ backgroundColor: 'white' }} id='note-link' value={`${window.location.origin}/${this.props.note._id}`} onClick={this.handleCopy.bind(this)} readOnly /> : undefined
+                  }
+                </div>
+              </div>
             </div>
-            {
-              this.state.isPublic ? <input className='editor__link' value={`${window.location.origin}/${this.props.note._id}`} onClick={this.handleCopy.bind(this)} readOnly></input> : undefined
-            }
           </div>
         </div>
       )
     } else {
       return (
-        <div className='editor'>
-          <p className='editor__message'>
-            { this.props.selectedNoteId ? 'Note not found' : 'Pick or create a note' }
-          </p>
+        <div className='card'>
+          <div className='card-body'>
+            <p className='editor__message'>
+              { this.props.selectedNoteId ? 'Note not found' : 'Pick or create a note' }
+            </p>
+          </div>
         </div>
       )
     }
@@ -116,7 +142,7 @@ Editor.propTypes = {
 
 export default createContainer(() => {
   const selectedNoteId = Session.get('selectedNoteId')
-  
+
   return {
     selectedNoteId,
     note: Notes.findOne(selectedNoteId),

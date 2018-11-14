@@ -8,16 +8,15 @@ export const Notes = new Mongo.Collection('notes')
 
 if (Meteor.isServer) {
   Meteor.publish('notes', function () {
-    return Notes.find({ $or: [{userId: this.userId},{isPublic: true}] })
+    return Notes.find({ $or: [{ userId: this.userId }, { isPublic: true }] })
   })
 }
 
 Meteor.methods({
-  'notes.insert'() {
+  'notes.insert' () {
     if (!this.userId) {
       throw new Meteor.Error('not-authorized')
     }
-    
     return Notes.insert({
       _id: shortid.generate(),
       title: '',
@@ -27,25 +26,22 @@ Meteor.methods({
       updatedAt: moment().valueOf()
     })
   },
-  'notes.remove'(_id) {
+  'notes.remove' (_id) {
     if (!this.userId) {
       throw new Meteor.Error('not-authorized')
     }
-    
     new SimpleSchema({
       _id: {
         type: String,
         min: 1
       }
     }).validate({ _id })
-    
     Notes.remove({ _id, userId: this.userId })
   },
-  'notes.update'(_id, updates) {
+  'notes.update' (_id, updates) {
     if (!this.userId) {
       throw new Meteor.Error('not-authorized')
     }
-    
     new SimpleSchema({
       _id: {
         type: String,
@@ -67,7 +63,6 @@ Meteor.methods({
       _id,
       ...updates
     })
-    
     Notes.update({
       _id,
       userId: this.userId

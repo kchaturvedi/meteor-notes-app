@@ -10,8 +10,8 @@ export const PublicViewer = (props) => {
     return (
       <div className='page-content'>
         <div className='editor'>
-          <input className='editor__title' value={props.note.title} placeholder='Untitled note' readOnly/>
-          <textarea className='editor__body' value={props.note.body} placeholder='Your note here' readOnly></textarea>
+          <input className='editor__title' value={props.note.title} placeholder='Untitled note' readOnly />
+          <textarea className='editor__body' value={props.note.body} placeholder='Your note here' readOnly />
         </div>
       </div>
     )
@@ -35,9 +35,8 @@ PublicViewer.propTypes = {
 export default createContainer(() => {
   Meteor.subscribe('notes')
   const selectedNoteId = Session.get('selectedNoteId')
-  const note = Notes.findOne(selectedNoteId)
   return {
     selectedNoteId,
-    note: Notes.findOne(selectedNoteId),
+    note: Notes.findOne(selectedNoteId)
   }
 }, PublicViewer)

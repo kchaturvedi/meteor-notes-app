@@ -1,1 +1,28 @@
-@import '../imports/client/styles/main';
+// @import '../imports/client/styles/blk-design-system';
+.form {
+  min-height: 10px !important;
+}
+
+#note-body {
+  padding: 0.5rem;
+  &:focus {
+    box-shadow: 0 0 0.1rem #666;
+  }
+}
+
+#note-title, #note-title::placeholder {
+  height: 2.5rem;
+  font-size: 1.5rem;
+}
+
+.togglebutton label input[type=checkbox]:checked+.toggle:after, .togglebutton label input[type=checkbox]+.toggle:after {
+  border-color: white;
+}
+
+.togglebutton label input[type=checkbox]:checked+.toggle {
+  background-color: #9bc99d;
+}
+
+.togglebutton label {
+  color: #555;
+}
