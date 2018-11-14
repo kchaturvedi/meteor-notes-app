@@ -39,6 +39,7 @@ export class Editor extends React.Component {
         this.props.call('notes.remove', this.props.note._id)
         this.props.browserHistory.push('/dashboard')
         this.setState({ deleteConfirm: false })
+        notecard.classList.remove('animated', 'fadeOutDown')
       }, 500)
     } else {
       this.setState({ deleteConfirm: true })
@@ -81,7 +82,7 @@ export class Editor extends React.Component {
   }
 
   render () {
-    const deleteButtonClass = this.state.deleteConfirm ? 'btn-warning' : 'btn-default'
+    const deleteButtonClass = this.state.deleteConfirm ? 'btn-warning' : 'btn-light'
 
     if (this.props.note) {
       return (
@@ -89,23 +90,23 @@ export class Editor extends React.Component {
           <div className='card-body' style={{ overflow: 'scroll' }}>
             <form className='form has-info'>
               <input id='note-title' type='text' className='form-control' value={this.state.title} placeholder='Untitled note' onChange={this.handleTitleChange.bind(this)} />
-              <textarea id='note-body' type='textarea' className='form-control mh-100 mt-2' rows='25' value={this.state.body} placeholder='Write something inspiring...' onChange={this.handleBodyChange.bind(this)} />
+              <textarea id='note-body' type='textarea' className='form-control mh-100 mt-2' rows='24' value={this.state.body} placeholder='Write something inspiring...' onChange={this.handleBodyChange.bind(this)} />
             </form>
           </div>
           <div className='card-footer pb-4'>
             <div className='container'>
               <div className='row align-items-center'>
                 <div className='col-lg-2 text-center'>
-                  <button className={'btn btn-sm ' + deleteButtonClass} onClick={this.handleDeleteNote.bind(this)}>
-                    {this.state.deleteConfirm ? 'Sure?' : 'Delete'}
+                  <button className={'btn btn-md ' + deleteButtonClass} onClick={this.handleDeleteNote.bind(this)}>
+                    {this.state.deleteConfirm ? 'Sure ?' : 'Delete'}
                   </button>
                 </div>
                 <div className='col-lg-2 text-center'>
-                  <div className='togglebutton'>
+                  <div className='togglebutton pt-4'>
                     <label>
                       <input type='checkbox' checked={this.state.isPublic} onChange={this.handlePrivacyChange.bind(this)} />
                       <span className='toggle' />
-                      {this.state.isPublic ? 'Public' : 'Private'}
+                      <h6>{this.state.isPublic ? 'Public' : 'Private'}</h6>
                     </label>
                   </div>
                 </div>
@@ -121,11 +122,11 @@ export class Editor extends React.Component {
       )
     } else {
       return (
-        <div className='card'>
+        <div className='card note-card' style={{ height: '69.8vh' }}>
           <div className='card-body'>
-            <p className='editor__message'>
+            <h5 className='display-5 text-center'>
               { this.props.selectedNoteId ? 'Note not found' : 'Pick or create a note' }
-            </p>
+            </h5>
           </div>
         </div>
       )

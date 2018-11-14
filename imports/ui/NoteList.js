@@ -14,7 +14,7 @@ export const NoteList = (props) => {
     <div className='card' style={{ height: '70vh' }}>
       <NoteListHeader />
       <div className='container text-center'>
-        <button type='button' className='btn btn-default' onClick={() => {
+        <button type='button' className='btn btn-light' onClick={() => {
           props.meteorCall('notes.insert', (err, res) => {
             if (res) {
               props.Session.set('selectedNoteId', res)

@@ -8,19 +8,34 @@ import { Notes } from '../api/notes'
 export const PublicViewer = (props) => {
   if (props.note) {
     return (
-      <div className='page-content'>
-        <div className='editor'>
-          <input className='editor__title' value={props.note.title} placeholder='Untitled note' readOnly />
-          <textarea className='editor__body' value={props.note.body} placeholder='Your note here' readOnly />
+      <div className='container'>
+        <div className='row'>
+          <div className='container'>
+            <div className='card note-card' style={{ height: '69.8vh' }} >
+              <div className='card-body' style={{ overflow: 'scroll' }}>
+                <form className='form'>
+                  <input id='note-title' type='text' className='form-control' style={{ backgroundColor: 'white' }} value={props.note.title} placeholder='Hello world' readOnly />
+                  <textarea id='note-body' type='textarea' className='form-control mh-100 mt-2' rows='26' style={{ backgroundColor: 'white' }} value={props.note.body} placeholder='Something inspiring should go here...' readOnly />
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
   } else {
     return (
-      <div className='page-content'>
-        <div className='editor'>
-          <p className='editor__message'>Note not found. The author might have deleted it or the link might have expired.
-          </p>
+      <div className='container'>
+        <div className='row'>
+          <div className='container'>
+            <div className='card note-card' style={{ height: '69.8vh' }}>
+              <div className='card-body'>
+                <h5 className='display-5 text-center'>
+                  Note not found. The author might have deleted it or the link might have expired.
+                </h5>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
