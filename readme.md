@@ -1,27 +1,47 @@
-# Notes App
+# The Notes App 📝
 
-This is a notes application built on Meteor using ReactJS and using Mocha + Enzyme for testing.
+This is a notes application built on the fantastic [Meteor](https://www.meteor.com) JS app platform and the robust [ReactJS](https://reactjs.org) front-end framework. It is deployed to the amazing and versatile [Heroku](https://heroku.com) PaaS.
 
-## Getting Started
+I built this in order to practice and further my skills in Meteor, React, and modern web app development.
 
-This app requires Meteor. After installing, clone the repo and then run the following commands in the root of the repo:
+For testing, I used [Mocha](https://mochajs.org) and [AirBnB Enzyme](https://airbnb.io/enzyme/).
+
+---
+
+## Demo 👀
+
+To see the app in action, visit [notes.iKartik.com](http://notes.ikartik.com).
+
+---
+
+## Features 🧰
+#### Auto-Save
+It's 2018... no more clicking an image of a floppy disk (what are *those*?)
+
+#### Public Note Sharing (read-only for now)
+With the flick of the Sharing Switch, you can get a public link directly to your note. Share this link with anyone and they will see a read-only version of your note.
+
+#### Live Updating
+Share your note with someone and then edit your note. Any and every person viewing your note will see the changes updated live!
+
+---
+
+## Run it locally 💻
+
+This app requires Meteor. Install it with the command:
+
+```
+curl https://install.meteor.com/ | sh
+```
+
+After Meteor is installed, clone this repo and then run the following commands in the root of the repo:
 
 ```
 meteor npm install
 ```
 
 ```
-meteor
+npm start
 ```
 
 After running the commands, visit `localhost:3000` in your browser to use the app.
-
-## Running tests
-
-Running tests is easy. Run the following command in the root of the repo:
-
-```
-npm test
-```
-
-Then simply visit the test reporter in the browser by visiting `localhost:3000`.
