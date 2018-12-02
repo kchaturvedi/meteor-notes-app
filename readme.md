@@ -19,10 +19,12 @@ To see the app in action, visit [notes.iKartik.com](http://notes.ikartik.com).
 It's 2018... no more clicking an image of a floppy disk (what are *those*?)
 
 #### Public Note Sharing (read-only for now)
-With the flick of the Sharing Switch, you can get a public link directly to your note. Share this link with anyone and they will see a read-only version of your note.
+With the flick of the Sharing Switch, you can get a public link directly to your note.
+
+Click on the link to copy it to the clipboard. Share this link with anyone and they will see a read-only version of your note.
 
 #### Live Updating
-Share your note with someone and then edit your note. Any and every person viewing your note will see the changes updated live!
+When you have shared your note, any and every person viewing your note will see the changes updated live!
 
 ---
 
