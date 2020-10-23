@@ -8,12 +8,6 @@ For testing, I used [Mocha](https://mochajs.org) and [AirBnB Enzyme](https://air
 
 ---
 
-## Demo 👀
-
-To see the app in action, visit [notes.iKartik.com](http://notes.ikartik.com).
-
----
-
 ## Features 🧰
 #### Auto-Save
 It's 2018... no more clicking an image of a floppy disk (what are *those*?)
